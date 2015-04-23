@@ -22,7 +22,6 @@ $('ul.tags').block_ellipsis({
    * You can either use a string, or a function that will take the number of
    * remaining blocks as a parameter
    */
-  /**
   more: function (nb) {
     return '<span class="more">Show ' + nb + ' more</span>';
   },

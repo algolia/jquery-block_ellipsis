@@ -22,12 +22,16 @@
         padding: 0px 5px;
         border: 1px solid #eee;
         text-align: justify;
+        text-align-last: justify;
       }
 
       p.example::after {
         content: '';
         width: 100%;
         display: block;
+        height: 0;
+        line-height: 0;
+        visibility: hidden;
         clear: both;
       }
 
@@ -618,9 +622,8 @@
       });
       $('p.example-4').block_ellipsis({
         lines: 2,
-        more: '<a href="#" style="display: inline-block;">Show more</a>',
-        more: function (nb) { return '<span class="label label-default">Show ' + nb + ' more</span>'; },
-        less: '<span class="label label-default">Show less</span>'
+        more: '<a href="#" style="display: inline-block;">...</a>',
+        less: '<a href="#" style="display: inline-block;">Show less</a>'
       });
       $('p.example-5').block_ellipsis({
         lines: 2,

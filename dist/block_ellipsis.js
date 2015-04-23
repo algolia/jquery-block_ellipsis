@@ -33,25 +33,31 @@
           use_less = (typeof (options.less) !== 'undefined' && options.less !== null),
           $more;
 
+      var insertSpaceBefore = function insertSpaceBefore ($obj) {
+        if (options.space_before_blocks === true) {
+          $obj.before(' ');
+        }
+      };
+
+      var topPosition = function topPosition ($obj) {
+        var border_top = parseInt($obj.css('border-top'), 10),
+            valign = $obj.css('vertical-align'),
+            res;
+        $obj.css('vertical-align', 'top');
+        if (isNaN(border_top)) {
+          border_top = 0;
+        }
+        res = $obj.position().top - border_top;
+        $obj.css('vertical-align', valign);
+
+        return res;
+      };
+
+
       (function () {
-        var $old_more = null,
-            old_valign = null;
+        var $old_more = null;
 
-        var valign = function (align) {
-          if (old_valign === null) {
-            old_valign = $old_more.css('vertical-align');
-          }
-          if (!!align === true) {
-            $old_more.css('vertical_align', 'top');
-          } else {
-            $old_more.css('vertical_align', old_valign);
-          }
-        };
-
-        $more = function $more (nb, align) {
-          if (typeof (valign) === 'undefined' || valign === null) {
-            valign = true;
-          }
+        $more = function $more (nb) {
           if (typeof (options.more) === 'undefined' || options.more === null) {
             if (!$old_more) {
               $old_more = $('<span style="display: inline-block; vertical-align: top; width: 0; height: 0; padding: 0; margin: 0; border: 0;"></span>');
@@ -60,29 +66,21 @@
           if (typeof (options.more) === 'string' || options.more instanceof String) {
             if (!$old_more) {
               $old_more = $(options.more);
-              valign(align);
             }
           } else if (typeof (options.more) === 'function') {
             if (typeof (nb) === 'undefined') {
               if (!$old_more) {
                 $old_more = $(options.more(nb));
               }
-              valign(align);
             } else {
               var $new_more = $(options.more(nb));
               $old_more.replaceWith($new_more);
               $old_more = $new_more;
-              valign(align);
             }
           }
           return $old_more;
         };
       }.call(this));
-      var insertSpaceBefore = function insertSpaceBefore ($obj) {
-        if (options.space_before_blocks === true) {
-          $obj.before(' ');
-        }
-      };
 
       /*
        * If it doesn't, we check where would be the See More
@@ -108,12 +106,12 @@
           return;
         }
         var $child = $(this),
-            position = $child.position();
+            top_position = topPosition($child);
 
         ++curr_nb_blocks;
-        if (position.top !== last_position) {
+        if (top_position !== last_position) {
           ++curr_line;
-          last_position = position.top;
+          last_position = top_position;
         }
         if (reached_min_line === Infinity  && curr_nb_blocks >= options.min_blocks) {
           reached_min_line = curr_line;
@@ -137,22 +135,24 @@
 
         $more().insertAfter($min_block);
         insertSpaceBefore($more());
-        more_pos = $more().position().top;
+        more_pos = topPosition($more());
         $more().remove();
 
-        if (more_pos !== $children.last().position().top) {
+        if (more_pos !== topPosition($children.last())) {
           var nb_nexts = $min_block.nextAll().length;
 
           $more(nb_nexts).insertAfter($min_block);
           insertSpaceBefore($more());
 
-          while ($more().position().top === ($next = $more().next()).position().top) {
-            $more(--nb_nexts).insertAfter($next);
-            insertSpaceBefore($more());
+          $next = $more();
+          while (more_pos === topPosition($next = $next.next())) {
+            --nb_nexts;
           }
+          $more().insertBefore($next);
 
           $nexts = $more().nextAll();
           $nexts.addClass('block_ellipsis_other').hide();
+
           insertSpaceBefore($more());
 
           if ($nexts.length && typeof (options.more) !== 'undefined' && options.more !== null) {
