@@ -1,0 +1,638 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width">
+    <title>Algolia block_ellipsis example</title>
+    <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css" type="text/css" media="screen" title="Bootstrap">
+    <style>
+      p {
+        width: 300px;
+        padding: 10px;
+        visibility: hidden;
+      }
+
+      p.test {
+        border: 1px solid red;
+      }
+
+      p.example {
+        width: 800px;
+        border-radius: 3px;
+        padding: 0px 5px;
+        border: 1px solid #eee;
+        text-align: justify;
+      }
+
+      p.example::after {
+        content: '';
+        width: 100%;
+        display: block;
+        clear: both;
+      }
+
+      p.example.example-1 {
+        width: 100%;
+      }
+
+      p.example span {
+        margin: 2px;
+      }
+
+      p.example span.label {
+        display: inline-block;
+        cursor: pointer;
+      }
+
+      p.test span {
+        display: inline-block;
+        cursor: pointer;
+        background: #aaa;
+        color: #fff;
+        padding: 5px;
+        border: 1px solid #ccc;
+        margin: 10px;
+      }
+
+      .more, .less {
+        background-color: #888;;
+        padding: 1px;
+        margin-top: 15px;
+      }
+    </style>
+  </head>
+  <body>
+    <h2>Examples</h2>
+
+    <h4>Basic 1 line</h4>
+    <p class="example example-1">
+      <span class="label label-info">Lorem</span>
+      <span class="label label-info">ipsum</span>
+      <span class="label label-info">dolor</span>
+      <span class="label label-info">sit</span>
+      <span class="label label-info">amet</span>
+      <span class="label label-info">consectetur</span>
+      <span class="label label-info">adipiscing</span>
+      <span class="label label-info">elit</span>
+      <span class="label label-info">sed</span>
+      <span class="label label-info">do</span>
+      <span class="label label-info">eiusmod</span>
+      <span class="label label-info">tempor</span>
+      <span class="label label-info">incididunt</span>
+      <span class="label label-info">ut</span>
+      <span class="label label-info">labore</span>
+      <span class="label label-info">et</span>
+      <span class="label label-info">dolore</span>
+      <span class="label label-info">magna</span>
+      <span class="label label-info">aliqua</span>
+      <span class="label label-info">Ut</span>
+      <span class="label label-info">enim</span>
+      <span class="label label-info">ad</span>
+      <span class="label label-info">minim</span>
+      <span class="label label-info">veniam</span>
+      <span class="label label-info">quis</span>
+      <span class="label label-info">nostrud</span>
+      <span class="label label-info">exercitation</span>
+      <span class="label label-info">ullamco</span>
+      <span class="label label-info">laboris</span>
+      <span class="label label-info">nisi</span>
+      <span class="label label-info">ut</span>
+      <span class="label label-info">aliquip</span>
+      <span class="label label-info">ex</span>
+      <span class="label label-info">ea</span>
+      <span class="label label-info">commodo</span>
+      <span class="label label-info">consequat</span>
+      <span class="label label-info">Duis</span>
+      <span class="label label-info">aute</span>
+      <span class="label label-info">irure</span>
+      <span class="label label-info">dolor</span>
+      <span class="label label-info">in</span>
+      <span class="label label-info">reprehenderit</span>
+      <span class="label label-info">in</span>
+      <span class="label label-info">voluptate</span>
+      <span class="label label-info">velit</span>
+      <span class="label label-info">esse</span>
+      <span class="label label-info">cillum</span>
+      <span class="label label-info">dolore</span>
+      <span class="label label-info">eu</span>
+      <span class="label label-info">fugiat</span>
+      <span class="label label-info">nulla</span>
+      <span class="label label-info">pariatur</span>
+      <span class="label label-info">Excepteur</span>
+      <span class="label label-info">sint</span>
+      <span class="label label-info">occaecat</span>
+      <span class="label label-info">cupidatat</span>
+      <span class="label label-info">non</span>
+      <span class="label label-info">proident</span>
+      <span class="label label-info">sunt</span>
+      <span class="label label-info">in</span>
+      <span class="label label-info">culpa</span>
+      <span class="label label-info">qui</span>
+      <span class="label label-info">officia</span>
+      <span class="label label-info">deserunt</span>
+      <span class="label label-info">mollit</span>
+      <span class="label label-info">anim</span>
+      <span class="label label-info">id</span>
+      <span class="label label-info">est</span>
+      <span class="label label-info">laborum</span>
+    </p>
+
+    <h4>2 lines</h4>
+    <p class="example example-2">
+      <span class="label label-info">Lorem</span>
+      <span class="label label-info">ipsum</span>
+      <span class="label label-info">dolor</span>
+      <span class="label label-info">sit</span>
+      <span class="label label-info">amet</span>
+      <span class="label label-info">consectetur</span>
+      <span class="label label-info">adipiscing</span>
+      <span class="label label-info">elit</span>
+      <span class="label label-info">sed</span>
+      <span class="label label-info">do</span>
+      <span class="label label-info">eiusmod</span>
+      <span class="label label-info">tempor</span>
+      <span class="label label-info">incididunt</span>
+      <span class="label label-info">ut</span>
+      <span class="label label-info">labore</span>
+      <span class="label label-info">et</span>
+      <span class="label label-info">dolore</span>
+      <span class="label label-info">magna</span>
+      <span class="label label-info">aliqua</span>
+      <span class="label label-info">Ut</span>
+      <span class="label label-info">enim</span>
+      <span class="label label-info">ad</span>
+      <span class="label label-info">minim</span>
+      <span class="label label-info">veniam</span>
+      <span class="label label-info">quis</span>
+      <span class="label label-info">nostrud</span>
+      <span class="label label-info">exercitation</span>
+      <span class="label label-info">ullamco</span>
+      <span class="label label-info">laboris</span>
+      <span class="label label-info">nisi</span>
+      <span class="label label-info">ut</span>
+      <span class="label label-info">aliquip</span>
+      <span class="label label-info">ex</span>
+      <span class="label label-info">ea</span>
+      <span class="label label-info">commodo</span>
+      <span class="label label-info">consequat</span>
+      <span class="label label-info">Duis</span>
+      <span class="label label-info">aute</span>
+      <span class="label label-info">irure</span>
+      <span class="label label-info">dolor</span>
+      <span class="label label-info">in</span>
+      <span class="label label-info">reprehenderit</span>
+      <span class="label label-info">in</span>
+      <span class="label label-info">voluptate</span>
+      <span class="label label-info">velit</span>
+      <span class="label label-info">esse</span>
+      <span class="label label-info">cillum</span>
+      <span class="label label-info">dolore</span>
+      <span class="label label-info">eu</span>
+      <span class="label label-info">fugiat</span>
+      <span class="label label-info">nulla</span>
+      <span class="label label-info">pariatur</span>
+      <span class="label label-info">Excepteur</span>
+      <span class="label label-info">sint</span>
+      <span class="label label-info">occaecat</span>
+      <span class="label label-info">cupidatat</span>
+      <span class="label label-info">non</span>
+      <span class="label label-info">proident</span>
+      <span class="label label-info">sunt</span>
+      <span class="label label-info">in</span>
+      <span class="label label-info">culpa</span>
+      <span class="label label-info">qui</span>
+      <span class="label label-info">officia</span>
+      <span class="label label-info">deserunt</span>
+      <span class="label label-info">mollit</span>
+      <span class="label label-info">anim</span>
+      <span class="label label-info">id</span>
+      <span class="label label-info">est</span>
+      <span class="label label-info">laborum</span>
+    </p>
+
+    <h4>Line of min_block > lines</h4>
+    <p class="example example-3">
+      <span class="label label-info">Lorem</span>
+      <span class="label label-info">ipsum</span>
+      <span class="label label-info">dolor</span>
+      <span class="label label-info">sit</span>
+      <span class="label label-info">amet</span>
+      <span class="label label-info">consectetur</span>
+      <span class="label label-info">adipiscing</span>
+      <span class="label label-info">elit</span>
+      <span class="label label-info">sed</span>
+      <span class="label label-info">do</span>
+      <span class="label label-info">eiusmod</span>
+      <span class="label label-info">tempor</span>
+      <span class="label label-info">incididunt</span>
+      <span class="label label-info">ut</span>
+      <span class="label label-info">labore</span>
+      <span class="label label-info">et</span>
+      <span class="label label-info">dolore</span>
+      <span class="label label-info">magna</span>
+      <span class="label label-info">aliqua</span>
+      <span class="label label-info">Ut</span>
+      <span class="label label-info">enim</span>
+      <span class="label label-info">ad</span>
+      <span class="label label-info">minim</span>
+      <span class="label label-info">veniam</span>
+      <span class="label label-info">quis</span>
+      <span class="label label-info">nostrud</span>
+      <span class="label label-info">exercitation</span>
+      <span class="label label-info">ullamco</span>
+      <span class="label label-info">laboris</span>
+      <span class="label label-info">nisi</span>
+      <span class="label label-info">ut</span>
+      <span class="label label-info">aliquip</span>
+      <span class="label label-info">ex</span>
+      <span class="label label-info">ea</span>
+      <span class="label label-info">commodo</span>
+      <span class="label label-info">consequat</span>
+      <span class="label label-info">Duis</span>
+      <span class="label label-info">aute</span>
+      <span class="label label-info">irure</span>
+      <span class="label label-info">dolor</span>
+      <span class="label label-info">in</span>
+      <span class="label label-info">reprehenderit</span>
+      <span class="label label-info">in</span>
+      <span class="label label-info">voluptate</span>
+      <span class="label label-info">velit</span>
+      <span class="label label-info">esse</span>
+      <span class="label label-info">cillum</span>
+      <span class="label label-info">dolore</span>
+      <span class="label label-info">eu</span>
+      <span class="label label-info">fugiat</span>
+      <span class="label label-info">nulla</span>
+      <span class="label label-info">pariatur</span>
+      <span class="label label-info">Excepteur</span>
+      <span class="label label-info">sint</span>
+      <span class="label label-info">occaecat</span>
+      <span class="label label-info">cupidatat</span>
+      <span class="label label-info">non</span>
+      <span class="label label-info">proident</span>
+      <span class="label label-info">sunt</span>
+      <span class="label label-info">in</span>
+      <span class="label label-info">culpa</span>
+      <span class="label label-info">qui</span>
+      <span class="label label-info">officia</span>
+      <span class="label label-info">deserunt</span>
+      <span class="label label-info">mollit</span>
+      <span class="label label-info">anim</span>
+      <span class="label label-info">id</span>
+      <span class="label label-info">est</span>
+      <span class="label label-info">laborum</span>
+    </p>
+
+    <h4>Custom show more</h4>
+    <p class="example example-4">
+      <span class="label label-info">Lorem</span>
+      <span class="label label-info">ipsum</span>
+      <span class="label label-info">dolor</span>
+      <span class="label label-info">sit</span>
+      <span class="label label-info">amet</span>
+      <span class="label label-info">consectetur</span>
+      <span class="label label-info">adipiscing</span>
+      <span class="label label-info">elit</span>
+      <span class="label label-info">sed</span>
+      <span class="label label-info">do</span>
+      <span class="label label-info">eiusmod</span>
+      <span class="label label-info">tempor</span>
+      <span class="label label-info">incididunt</span>
+      <span class="label label-info">ut</span>
+      <span class="label label-info">labore</span>
+      <span class="label label-info">et</span>
+      <span class="label label-info">dolore</span>
+      <span class="label label-info">magna</span>
+      <span class="label label-info">aliqua</span>
+      <span class="label label-info">Ut</span>
+      <span class="label label-info">enim</span>
+      <span class="label label-info">ad</span>
+      <span class="label label-info">minim</span>
+      <span class="label label-info">veniam</span>
+      <span class="label label-info">quis</span>
+      <span class="label label-info">nostrud</span>
+      <span class="label label-info">exercitation</span>
+      <span class="label label-info">ullamco</span>
+      <span class="label label-info">laboris</span>
+      <span class="label label-info">nisi</span>
+      <span class="label label-info">ut</span>
+      <span class="label label-info">aliquip</span>
+      <span class="label label-info">ex</span>
+      <span class="label label-info">ea</span>
+      <span class="label label-info">commodo</span>
+      <span class="label label-info">consequat</span>
+      <span class="label label-info">Duis</span>
+      <span class="label label-info">aute</span>
+      <span class="label label-info">irure</span>
+      <span class="label label-info">dolor</span>
+      <span class="label label-info">in</span>
+      <span class="label label-info">reprehenderit</span>
+      <span class="label label-info">in</span>
+      <span class="label label-info">voluptate</span>
+      <span class="label label-info">velit</span>
+      <span class="label label-info">esse</span>
+      <span class="label label-info">cillum</span>
+      <span class="label label-info">dolore</span>
+      <span class="label label-info">eu</span>
+      <span class="label label-info">fugiat</span>
+      <span class="label label-info">nulla</span>
+      <span class="label label-info">pariatur</span>
+      <span class="label label-info">Excepteur</span>
+      <span class="label label-info">sint</span>
+      <span class="label label-info">occaecat</span>
+      <span class="label label-info">cupidatat</span>
+      <span class="label label-info">non</span>
+      <span class="label label-info">proident</span>
+      <span class="label label-info">sunt</span>
+      <span class="label label-info">in</span>
+      <span class="label label-info">culpa</span>
+      <span class="label label-info">qui</span>
+      <span class="label label-info">officia</span>
+      <span class="label label-info">deserunt</span>
+      <span class="label label-info">mollit</span>
+      <span class="label label-info">anim</span>
+      <span class="label label-info">id</span>
+      <span class="label label-info">est</span>
+      <span class="label label-info">laborum</span>
+    </p>
+
+    <h4>No show less</h4>
+    <p class="example example-5">
+      <span class="label label-info">Lorem</span>
+      <span class="label label-info">ipsum</span>
+      <span class="label label-info">dolor</span>
+      <span class="label label-info">sit</span>
+      <span class="label label-info">amet</span>
+      <span class="label label-info">consectetur</span>
+      <span class="label label-info">adipiscing</span>
+      <span class="label label-info">elit</span>
+      <span class="label label-info">sed</span>
+      <span class="label label-info">do</span>
+      <span class="label label-info">eiusmod</span>
+      <span class="label label-info">tempor</span>
+      <span class="label label-info">incididunt</span>
+      <span class="label label-info">ut</span>
+      <span class="label label-info">labore</span>
+      <span class="label label-info">et</span>
+      <span class="label label-info">dolore</span>
+      <span class="label label-info">magna</span>
+      <span class="label label-info">aliqua</span>
+      <span class="label label-info">Ut</span>
+      <span class="label label-info">enim</span>
+      <span class="label label-info">ad</span>
+      <span class="label label-info">minim</span>
+      <span class="label label-info">veniam</span>
+      <span class="label label-info">quis</span>
+      <span class="label label-info">nostrud</span>
+      <span class="label label-info">exercitation</span>
+      <span class="label label-info">ullamco</span>
+      <span class="label label-info">laboris</span>
+      <span class="label label-info">nisi</span>
+      <span class="label label-info">ut</span>
+      <span class="label label-info">aliquip</span>
+      <span class="label label-info">ex</span>
+      <span class="label label-info">ea</span>
+      <span class="label label-info">commodo</span>
+      <span class="label label-info">consequat</span>
+      <span class="label label-info">Duis</span>
+      <span class="label label-info">aute</span>
+      <span class="label label-info">irure</span>
+      <span class="label label-info">dolor</span>
+      <span class="label label-info">in</span>
+      <span class="label label-info">reprehenderit</span>
+      <span class="label label-info">in</span>
+      <span class="label label-info">voluptate</span>
+      <span class="label label-info">velit</span>
+      <span class="label label-info">esse</span>
+      <span class="label label-info">cillum</span>
+      <span class="label label-info">dolore</span>
+      <span class="label label-info">eu</span>
+      <span class="label label-info">fugiat</span>
+      <span class="label label-info">nulla</span>
+      <span class="label label-info">pariatur</span>
+      <span class="label label-info">Excepteur</span>
+      <span class="label label-info">sint</span>
+      <span class="label label-info">occaecat</span>
+      <span class="label label-info">cupidatat</span>
+      <span class="label label-info">non</span>
+      <span class="label label-info">proident</span>
+      <span class="label label-info">sunt</span>
+      <span class="label label-info">in</span>
+      <span class="label label-info">culpa</span>
+      <span class="label label-info">qui</span>
+      <span class="label label-info">officia</span>
+      <span class="label label-info">deserunt</span>
+      <span class="label label-info">mollit</span>
+      <span class="label label-info">anim</span>
+      <span class="label label-info">id</span>
+      <span class="label label-info">est</span>
+      <span class="label label-info">laborum</span>
+    </p>
+
+    <h4>No show more, no show less</h4>
+    <p class="example example-6">
+      <span class="label label-info">Lorem</span>
+      <span class="label label-info">ipsum</span>
+      <span class="label label-info">dolor</span>
+      <span class="label label-info">sit</span>
+      <span class="label label-info">amet</span>
+      <span class="label label-info">consectetur</span>
+      <span class="label label-info">adipiscing</span>
+      <span class="label label-info">elit</span>
+      <span class="label label-info">sed</span>
+      <span class="label label-info">do</span>
+      <span class="label label-info">eiusmod</span>
+      <span class="label label-info">tempor</span>
+      <span class="label label-info">incididunt</span>
+      <span class="label label-info">ut</span>
+      <span class="label label-info">labore</span>
+      <span class="label label-info">et</span>
+      <span class="label label-info">dolore</span>
+      <span class="label label-info">magna</span>
+      <span class="label label-info">aliqua</span>
+      <span class="label label-info">Ut</span>
+      <span class="label label-info">enim</span>
+      <span class="label label-info">ad</span>
+      <span class="label label-info">minim</span>
+      <span class="label label-info">veniam</span>
+      <span class="label label-info">quis</span>
+      <span class="label label-info">nostrud</span>
+      <span class="label label-info">exercitation</span>
+      <span class="label label-info">ullamco</span>
+      <span class="label label-info">laboris</span>
+      <span class="label label-info">nisi</span>
+      <span class="label label-info">ut</span>
+      <span class="label label-info">aliquip</span>
+      <span class="label label-info">ex</span>
+      <span class="label label-info">ea</span>
+      <span class="label label-info">commodo</span>
+      <span class="label label-info">consequat</span>
+      <span class="label label-info">Duis</span>
+      <span class="label label-info">aute</span>
+      <span class="label label-info">irure</span>
+      <span class="label label-info">dolor</span>
+      <span class="label label-info">in</span>
+      <span class="label label-info">reprehenderit</span>
+      <span class="label label-info">in</span>
+      <span class="label label-info">voluptate</span>
+      <span class="label label-info">velit</span>
+      <span class="label label-info">esse</span>
+      <span class="label label-info">cillum</span>
+      <span class="label label-info">dolore</span>
+      <span class="label label-info">eu</span>
+      <span class="label label-info">fugiat</span>
+      <span class="label label-info">nulla</span>
+      <span class="label label-info">pariatur</span>
+      <span class="label label-info">Excepteur</span>
+      <span class="label label-info">sint</span>
+      <span class="label label-info">occaecat</span>
+      <span class="label label-info">cupidatat</span>
+      <span class="label label-info">non</span>
+      <span class="label label-info">proident</span>
+      <span class="label label-info">sunt</span>
+      <span class="label label-info">in</span>
+      <span class="label label-info">culpa</span>
+      <span class="label label-info">qui</span>
+      <span class="label label-info">officia</span>
+      <span class="label label-info">deserunt</span>
+      <span class="label label-info">mollit</span>
+      <span class="label label-info">anim</span>
+      <span class="label label-info">id</span>
+      <span class="label label-info">est</span>
+      <span class="label label-info">laborum</span>
+    </p>
+
+    <h2>Tests</h2>
+
+    <h4>Should fit in one line</h4>
+    <h5>No Show more - 1 line</h5>
+    <p class="test test-1-line">
+      <span>1</span>
+      <span>2</span>
+      <span>3</span>
+      <span>4</span>
+      <span>5</span>
+      <span>6</span>
+    </p>
+
+    <h4>Since the Show More would wrap on another line, it uses this second line (and it fits)</h4>
+    <h5>No Show more - 2 lines</h5>
+    <p class="test test-1-line">
+      <span>1</span>
+      <span>2</span>
+      <span>3</span>
+      <span>4</span>
+      <span>5</span>
+      <span>6</span>
+      <span>7</span>
+      <span>8</span>
+    </p>
+
+    <h4>Since the Show More would wrap on another line, it uses this second line (and it doesn't fit)</h4>
+    <h5>Show more - 2 lines -> 4 lines</h5>
+    <p class="test test-1-line">
+      <span>1</span>
+      <span>2</span>
+      <span>3</span>
+      <span>4</span>
+      <span>5</span>
+      <span>6</span>
+      <span>7</span>
+      <span>8</span>
+      <span>9</span>
+      <span>10</span>
+      <span>11</span>
+      <span>12</span>
+      <span>13</span>
+      <span>14</span>
+      <span>15</span>
+      <span>16</span>
+      <span>17</span>
+      <span>18</span>
+      <span>19</span>
+    </p>
+
+    <h4>Since the Show More would fit in this line, displays it</h4>
+    <h5>Show more - 1 line</h5>
+    <p class="test test-1-line" style="width: 400px;">
+      <span>1</span>
+      <span>2</span>
+      <span>3</span>
+      <span>4</span>
+      <span>5</span>
+      <span>6</span>
+      <span>7</span>
+      <span>8</span>
+      <span>9</span>
+      <span>10</span>
+      <span>11</span>
+    </p>
+
+    <h4>min_block &lt; lines</h4>
+    <h5>Show more - 2 lines</h5>
+    <p class="test test-2-lines">
+      <span>1</span>
+      <span>2</span>
+      <span>3</span>
+      <span>4</span>
+      <span>5</span>
+      <span>6</span>
+      <span>7</span>
+      <span>8</span>
+      <span>9</span>
+      <span>10</span>
+      <span>11</span>
+      <span>12</span>
+      <span>13</span>
+      <span>14</span>
+      <span>15</span>
+      <span>16</span>
+      <span>17</span>
+      <span>18</span>
+      <span>19</span>
+      <span>20</span>
+    </p>
+
+    <script src="https://code.jquery.com/jquery-2.1.3.min.js" type="text/javascript" charset="utf-8"></script>
+    <script src="dist/block_ellipsis.js" type="text/javascript" charset="utf-8"></script>
+    <script>
+      $('p.test-1-line').block_ellipsis({ min_blocks: 5 });
+      $('p.test-2-lines').block_ellipsis({ lines: 2, min_blocks: 0 });
+      $('p.example-1').block_ellipsis({
+        lines: 1,
+        min_blocks: 0,
+        more: function (nb) { return '<span class="label label-default">Show ' + nb + ' more</span>'; },
+        less: '<span class="label label-default">Show less</span>'
+      });
+      $('p.example-2').block_ellipsis({
+        lines: 2,
+        min_blocks: 0,
+        more: function (nb) { return '<span class="label label-default">Show ' + nb + ' more</span>'; },
+        less: '<span class="label label-default">Show less</span>'
+      });
+      $('p.example-3').block_ellipsis({
+        lines: 2,
+        min_blocks: 45,
+        more: function (nb) { return '<span class="label label-default">Show ' + nb + ' more</span>'; },
+        less: '<span class="label label-default">Show less</span>'
+      });
+      $('p.example-4').block_ellipsis({
+        lines: 2,
+        more: '<a href="#" style="display: inline-block;">Show more</a>',
+        more: function (nb) { return '<span class="label label-default">Show ' + nb + ' more</span>'; },
+        less: '<span class="label label-default">Show less</span>'
+      });
+      $('p.example-5').block_ellipsis({
+        lines: 2,
+        less: null,
+        more: function (nb) { return '<span class="label label-default">Show ' + nb + ' more</span>'; },
+        less: '<span class="label label-default">Show less</span>'
+      });
+      $('p.example-6').block_ellipsis({
+        lines: 2,
+        more: null,
+        less: null
+      });
+    </script>
+  </body>
+</html>
