@@ -1,5 +1,7 @@
-(function (module, $) {
+(function ($) {
   'use strict';
+
+  var $all = [];
 
   var DEFAULT = {
     lines: 1,
@@ -143,12 +145,12 @@
 
           $more(nb_nexts).insertAfter($min_block);
           insertSpaceBefore($more());
-
           $next = $more();
-          while (more_pos === topPosition($next = $next.next())) {
-            --nb_nexts;
+          while (topPosition($more()) === topPosition($next = $more().next())) {
+            $more().remove();
+            $more(--nb_nexts).insertAfter($next);
+            insertSpaceBefore($more());
           }
-          $more().insertBefore($next);
 
           $nexts = $more().nextAll();
           $nexts.addClass('block_ellipsis_other').hide();
@@ -177,6 +179,8 @@
           }
         }
       }
+
+      $all.push({ root: $root, more: $more(), less: $less, options: options });
     });
     for (var rule in options.css) {
       if (options.css.hasOwnProperty(rule)) {
@@ -185,6 +189,17 @@
     }
   };
 
-  module.block_ellipsis = block_ellipsis;
   $.fn.block_ellipsis = block_ellipsis;
-}(this, jQuery));
+
+  $(window).on('resize', function () {
+    var len = $all.length;
+    for (var i = 0; i < len; ++i) {
+      var elt = $all[i];
+      elt.more.remove();
+      elt.less.remove();
+      elt.root.find('.block_ellipsis_other').removeClass('.block_ellipsis_other').show();
+      elt.root.block_ellipsis(elt.options, true);
+    }
+    $all.splice(0, len);
+  });
+}.call(this, jQuery));
