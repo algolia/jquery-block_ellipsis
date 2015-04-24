@@ -17,6 +17,45 @@
     }
   };
 
+  var topPosition = function topPosition ($obj) {
+    var border_top = parseInt($obj.css('border-top'), 10),
+        valign = $obj.css('vertical-align'),
+        res;
+    $obj.css('vertical-align', 'top');
+    if (isNaN(border_top)) {
+      border_top = 0;
+    }
+    res = $obj.position().top - border_top;
+    $obj.css('vertical-align', valign);
+
+    return res;
+  };
+
+  /**
+   * Returns a function, that, as long as it continues to be invoked, will not
+   * be triggered. The function will be called after it stops being called for
+   * N milliseconds. If `immediate` is passed, trigger the function on the
+   * leading edge, instead of the trailing.
+   */
+  var debounce = function debounce(func, wait, immediate) {
+    var timeout;
+    return function() {
+      var context = this, args = arguments;
+      var later = function() {
+        timeout = null;
+        if (!immediate) {
+          func.apply(context, args);
+        }
+      };
+      var callNow = immediate && !timeout;
+      clearTimeout(timeout);
+      timeout = setTimeout(later, wait);
+      if (callNow) {
+        func.apply(context, args);
+      }
+    };
+  };
+
   /* Truncates a block
    * @param object options - Available options :
    *   - `lines` : Number of lines you want to display
@@ -29,32 +68,17 @@
     }
     options = $.extend({}, DEFAULT, options);
 
+    var insertSpaceBefore = function insertSpaceBefore ($obj) {
+      if (options.space_before_blocks === true) {
+        $obj.before(' ');
+      }
+    };
+
     $(this).each(function () {
       var $root = $(this),
           $less = $(options.less),
           use_less = (typeof (options.less) !== 'undefined' && options.less !== null),
           $more;
-
-      var insertSpaceBefore = function insertSpaceBefore ($obj) {
-        if (options.space_before_blocks === true) {
-          $obj.before(' ');
-        }
-      };
-
-      var topPosition = function topPosition ($obj) {
-        var border_top = parseInt($obj.css('border-top'), 10),
-            valign = $obj.css('vertical-align'),
-            res;
-        $obj.css('vertical-align', 'top');
-        if (isNaN(border_top)) {
-          border_top = 0;
-        }
-        res = $obj.position().top - border_top;
-        $obj.css('vertical-align', valign);
-
-        return res;
-      };
-
 
       (function () {
         var $old_more = null;
@@ -191,7 +215,7 @@
 
   $.fn.block_ellipsis = block_ellipsis;
 
-  $(window).on('resize', function () {
+  $(window).on('resize', debounce(function () {
     var len = $all.length;
     for (var i = 0; i < len; ++i) {
       var elt = $all[i];
@@ -201,5 +225,5 @@
       elt.root.block_ellipsis(elt.options, true);
     }
     $all.splice(0, len);
-  });
+  }, 250));
 }.call(this, jQuery));
