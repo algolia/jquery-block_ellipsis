@@ -600,38 +600,44 @@
     <script src="https://code.jquery.com/jquery-2.1.3.min.js" type="text/javascript" charset="utf-8"></script>
     <script src="dist/block_ellipsis.js" type="text/javascript" charset="utf-8"></script>
     <script>
-      $('p.test-1-line').block_ellipsis({ min_blocks: 5 });
-      $('p.test-2-lines').block_ellipsis({ lines: 2, min_blocks: 0 });
+      $('p.test-1-line').block_ellipsis({ debug: true, min_blocks: 5 });
+      $('p.test-2-lines').block_ellipsis({ debug: true, lines: 2, min_blocks: 0 });
       $('p.example-1').block_ellipsis({
+        debug: true,
         lines: 1,
         min_blocks: 0,
         more: function (nb) { return '<span class="label label-default">Show ' + nb + ' more</span>'; },
         less: '<span class="label label-default">Show less</span>'
       });
       $('p.example-2').block_ellipsis({
+        debug: true,
         lines: 2,
         min_blocks: 0,
         more: function (nb) { return '<span class="label label-default">Show ' + nb + ' more</span>'; },
         less: '<span class="label label-default">Show less</span>'
       });
       $('p.example-3').block_ellipsis({
+        debug: true,
         lines: 2,
         min_blocks: 45,
         more: function (nb) { return '<span class="label label-default">Show ' + nb + ' more</span>'; },
         less: '<span class="label label-default">Show less</span>'
       });
       $('p.example-4').block_ellipsis({
+        debug: true,
         lines: 2,
         more: '<a href="#" style="display: inline-block;">...</a>',
         less: '<a href="#" style="display: inline-block;">Show less</a>'
       });
       $('p.example-5').block_ellipsis({
+        debug: true,
         lines: 2,
         less: null,
         more: function (nb) { return '<span class="label label-default">Show ' + nb + ' more</span>'; },
         less: '<span class="label label-default">Show less</span>'
       });
       $('p.example-6').block_ellipsis({
+        debug: true,
         lines: 2,
         more: null,
         less: null

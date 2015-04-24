@@ -14,7 +14,8 @@
     css: {
       visibility: 'visible',
       overflow: 'visible'
-    }
+    },
+    debug: false
   };
 
   var topPosition = function topPosition ($obj) {
@@ -144,7 +145,9 @@
         }
         if (!$min_block && curr_line >= reached_min_line && curr_line >= options.lines) {
           $min_block = $child;
-          $min_block.css('background', 'red');
+          if (options.debug) {
+            $min_block.css('background', 'red');
+          }
         }
         if (curr_line > reached_min_line && curr_line > options.lines) {
           need_ellipsis = true;

@@ -44,7 +44,11 @@ $('ul.tags').block_ellipsis({
   css: {
     visibility: 'visible',
     overflow: 'visible'
-  }
+  },
+  /**
+   * Enables debug features
+   */
+  debug: false
 });
 ```
 
