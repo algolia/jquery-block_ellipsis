@@ -197,7 +197,7 @@
       var elt = $all[i];
       elt.more.remove();
       elt.less.remove();
-      elt.root.find('.block_ellipsis_other').removeClass('.block_ellipsis_other').show();
+      elt.root.find('.block_ellipsis_other').removeClass('block_ellipsis_other').show();
       elt.root.block_ellipsis(elt.options, true);
     }
     $all.splice(0, len);
