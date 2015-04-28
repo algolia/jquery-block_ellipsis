@@ -1,0 +1,26 @@
+{
+  "name": "jquery-block_ellipsis",
+  "homepage": "https://github.com/algolia/jquery-block_ellipsis",
+  "description": "This jQuery plugin truncates a list of inline-blocks to a certain amount of lines with an optional show more/less. Responsive-ready.",
+  "main": "dist/jquery-block_ellipsis.min.js",
+  "keywords": [
+    "jquery",
+    "inline-block",
+    "block",
+    "ellipsis",
+    "truncate",
+    "responsive"
+  ],
+  "authors": [
+    "Algolia"
+  ],
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "tests",
+    "src",
+    "node_modules",
+    "index.html",
+    "package.json"
+  ]
+}

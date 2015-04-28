@@ -1,5 +1,13 @@
 (function ($) {
   'use strict';
+  var _ = {
+    debounce: require('lodash/function/debounce'),
+    isFunction: require('lodash/lang/isFunction'),
+    isNaN: require('lodash/lang/isNaN'),
+    isNull: require('lodash/lang/isNull'),
+    isString: require('lodash/lang/isString'),
+    isUndefined: require('lodash/lang/isUndefined')
+  };
 
   var $all = [];
 
@@ -23,38 +31,13 @@
         valign = $obj.css('vertical-align'),
         res;
     $obj.css('vertical-align', 'top');
-    if (isNaN(border_top)) {
+    if (_.isNaN(border_top)) {
       border_top = 0;
     }
     res = $obj.position().top - border_top;
     $obj.css('vertical-align', valign);
 
     return res;
-  };
-
-  /**
-   * Returns a function, that, as long as it continues to be invoked, will not
-   * be triggered. The function will be called after it stops being called for
-   * N milliseconds. If `immediate` is passed, trigger the function on the
-   * leading edge, instead of the trailing.
-   */
-  var debounce = function debounce(func, wait, immediate) {
-    var timeout;
-    return function() {
-      var context = this, args = arguments;
-      var later = function() {
-        timeout = null;
-        if (!immediate) {
-          func.apply(context, args);
-        }
-      };
-      var callNow = immediate && !timeout;
-      clearTimeout(timeout);
-      timeout = setTimeout(later, wait);
-      if (callNow) {
-        func.apply(context, args);
-      }
-    };
   };
 
   /* Truncates a block
@@ -64,7 +47,7 @@
    *   - `less`  : HTML to display less
    */
   var block_ellipsis = function (options) {
-    if (typeof (options) === 'undefined') {
+    if (_.isUndefined(options)) {
       options = {};
     }
     options = $.extend({}, DEFAULT, options);
@@ -78,24 +61,24 @@
     $(this).each(function () {
       var $root = $(this),
           $less = $(options.less),
-          use_less = (typeof (options.less) !== 'undefined' && options.less !== null),
+          use_less = (!_.isUndefined(options.less) && !_.isNull(options.less)),
           $more;
 
       (function () {
         var $old_more = null;
 
         $more = function $more (nb) {
-          if (typeof (options.more) === 'undefined' || options.more === null) {
+          if (_.isUndefined(options.more) || _.isNull(options.more)) {
             if (!$old_more) {
               $old_more = $('<span style="display: inline-block; vertical-align: top; width: 0; height: 0; padding: 0; margin: 0; border: 0;"></span>');
             }
           }
-          if (typeof (options.more) === 'string' || options.more instanceof String) {
+          if (_.isString(options.more)) {
             if (!$old_more) {
               $old_more = $(options.more);
             }
-          } else if (typeof (options.more) === 'function') {
-            if (typeof (nb) === 'undefined') {
+          } else if (_.isFunction(options.more)) {
+            if (_.isUndefined(nb)) {
               if (!$old_more) {
                 $old_more = $(options.more(nb));
               }
@@ -184,7 +167,7 @@
 
           insertSpaceBefore($more());
 
-          if ($nexts.length && typeof (options.more) !== 'undefined' && options.more !== null) {
+          if ($nexts.length && !_.isUndefined(options.more) && !_.isNull(options.more)) {
             $more().on('click', function () {
               $root.find('.block_ellipsis_other').show();
               $more().hide();
@@ -216,9 +199,9 @@
     }
   };
 
-  $.fn.block_ellipsis = block_ellipsis;
+  $.fn.block_ellipsis = module.exports = block_ellipsis;
 
-  $(window).on('resize', debounce(function () {
+  $(window).on('resize', _.debounce(function () {
     var len = $all.length;
     for (var i = 0; i < len; ++i) {
       var elt = $all[i];
