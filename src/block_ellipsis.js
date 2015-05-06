@@ -170,6 +170,7 @@
           if ($nexts.length && !_.isUndefined(options.more) && !_.isNull(options.more)) {
             $more().on('click', function (e) {
               e.preventDefault();
+              e.stopPropagation();
               $root.find('.block_ellipsis_other').show();
               $more().hide();
               if (use_less) {
@@ -179,6 +180,7 @@
             if (use_less) {
               $less.on('click', function (e) {
                 e.preventDefault();
+                e.stopPropagation();
                 $root.find('.block_ellipsis_other').hide();
                 $less.hide();
                 $more().show();
