@@ -1,6 +1,6 @@
 {
   "name": "jquery-block_ellipsis",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "This jQuery plugin truncates a list of inline-blocks to a certain amount of lines with an optional show more/less. Responsive-ready.",
   "main": "index.js",
   "repository": {

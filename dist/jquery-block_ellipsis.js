@@ -760,7 +760,8 @@ module.exports = escapeRegExp;
           insertSpaceBefore($more());
 
           if ($nexts.length && !_.isUndefined(options.more) && !_.isNull(options.more)) {
-            $more().on('click', function () {
+            $more().on('click', function (e) {
+              e.preventDefault ? e.preventDefault() : event.returnValue = false;
               $root.find('.block_ellipsis_other').show();
               $more().hide();
               if (use_less) {
@@ -768,7 +769,8 @@ module.exports = escapeRegExp;
               }
             });
             if (use_less) {
-              $less.on('click', function () {
+              $less.on('click', function (e) {
+                e.preventDefault ? e.preventDefault() : event.returnValue = false;
                 $root.find('.block_ellipsis_other').hide();
                 $less.hide();
                 $more().show();
