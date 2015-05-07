@@ -1,6 +1,6 @@
 {
   "name": "jquery-block_ellipsis",
-  "version": "1.0.1",
+  "version": "1.0.3",
   "description": "This jQuery plugin truncates a list of inline-blocks to a certain amount of lines with an optional show more/less. Responsive-ready.",
   "main": "index.js",
   "repository": {
@@ -22,7 +22,7 @@
   },
   "homepage": "https://github.com/algolia/jquery-block_ellipsis#readme",
   "scripts": {
-    "build": "browserify src/block_ellipsis.js -o dist/jquery-block_ellipsis.js && uglifyjs dist/jquery-block_ellipsis.js --mangle --compress -o dist/jquery-block_ellipsis.min.js",
+    "build": "browserify src/block_ellipsis.js -o dist/jquery-block_ellipsis.js && uglifyjs dist/jquery-block_ellipsis.js --mangle --compress --source-map dist/jquery-block_ellipsis.min.js.map -o dist/jquery-block_ellipsis.min.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "devDependencies": {
