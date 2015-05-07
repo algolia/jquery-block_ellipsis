@@ -22,7 +22,7 @@
   },
   "homepage": "https://github.com/algolia/jquery-block_ellipsis#readme",
   "scripts": {
-    "build": "browserify src/block_ellipsis.js -o dist/jquery-block_ellipsis.js && uglifyjs dist/jquery-block_ellipsis.js --mangle --compress --source-map dist/jquery-block_ellipsis.min.js.map --source-map-url jquery-block_ellipsis.min.js.map -o dist/jquery-block_ellipsis.min.js",
+    "build": "browserify src/block_ellipsis.js -o dist/jquery-block_ellipsis.js && cd dist && uglifyjs jquery-block_ellipsis.js -o jquery-block_ellipsis.min.js --mangle --compress --source-map jquery-block_ellipsis.min.js.map && cd ..",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "devDependencies": {
